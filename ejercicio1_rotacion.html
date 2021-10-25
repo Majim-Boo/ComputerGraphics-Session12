@@ -1,0 +1,41 @@
+<canvas id='canvas' width=600 height=400>
+    <script>
+    function polygon(a, colorBorde, colorRelleno) {   
+      ctx.beginPath()
+      ctx.strokeStyle = colorBorde
+      ctx.fillStyle = colorRelleno
+      ctx.moveTo(a[0],a[1])
+      for (var i=2; i < a.length; i+=2)
+        ctx.lineTo(a[i],a[i+1]);
+      ctx.closePath()
+      ctx.stroke()
+      ctx.fill()
+    }
+
+    function rotacionPunto(cxOb, cyOb, rot){
+      var mr =[[Math.cos(r), -Math.sin(r)] , [Math.sin(r), -Math.cos(r)]] //Matriz de 2x2
+      //Completar...
+    }
+
+     function rotacionObj (obj, r){
+        var s =[]; //variable para guardar el resultado
+        
+        for (var i=0; i<obj.length; i+=2) {//Recorriendo los vertices del objeto  
+          var pr = rotacionPunto(obj[i], obj[i+1], r); //Rotacion del vertice i/2
+          s[i] = pr[i % 2 == 0 ? 0 : 1];
+        }
+        return s;
+     }
+      var canvas = document.getElementById('canvas')
+      var ctx = canvas.getContext('2d');
+    
+      var letra_e = [0,0, 0,50, 40,50, 40,40, 10,40, 10,30, 20,30, 20,20, 10,20, 10,10, 40,10, 40,0];
+      
+      var r = Math.PI/6; //Ángulo de rotacion
+      
+      var letra_e_rotada = rotacionObj(letra_e, r)
+
+      polygon( letra_e, 'transparent' , 'grey');
+      polygon( letra_e_rotada, 'transparent' , 'red');
+    
+    </script>
